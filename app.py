@@ -95,7 +95,30 @@ def get_color_name(rgb):
 def rgb_to_hex(rgb):
     return "#{:02x}{:02x}{:02x}".format(rgb[0], rgb[1], rgb[2])
 
- 
+def get_outfit_suggestion(color_name):
+    suggestions = {
+        "Black": "This item can be styled with white, gray, denim, or bold accent colors.",
+        "White": "This item works well with denim, beige, black, or soft pastel tones.",
+        "Gray": "This item pairs nicely with black, white, navy, or muted colors.",
+        "Brown": "This item looks good with beige, cream, denim, olive, or white pieces.",
+        "Dark Brown": "This item pairs well with cream, beige, light denim, olive, and warm neutral tones.",
+        "Beige": "This item works well with brown, white, navy, denim, or soft earth tones.",
+        "Blue": "This item pairs nicely with white, beige, gray, or denim pieces.",
+        "Navy": "This item looks elegant with white, beige, gray, or light blue tones.",
+        "Red": "This item works well as a statement piece with black, white, denim, or neutral colors.",
+        "Pink": "This item pairs well with white, beige, gray, denim, or soft pastel tones.",
+        "Green": "This item looks good with beige, brown, white, denim, or earthy colors.",
+        "Olive": "This item pairs well with beige, cream, black, denim, and brown tones.",
+        "Yellow": "This item works best with white, denim, beige, or simple neutral colors.",
+        "Orange": "This item pairs well with cream, denim, brown, beige, or warm neutral tones.",
+        "Purple": "This item looks nice with white, gray, black, or soft neutral colors."
+    }
+
+    return suggestions.get(
+        color_name,
+        "Try styling this item with neutral colors like white, black, beige, or denim."
+    )
+
 def detect_clothing_area(image):
     results = detection_model(image)
     result = results[0]
@@ -172,6 +195,9 @@ if uploaded_file is not None:
 
     color_name = get_color_name(dominant_color)
 
+    outfit_suggestion = get_outfit_suggestion(color_name)
+
+    
     st.subheader("Dominant Color")
 
     hex_color = rgb_to_hex(dominant_color)
@@ -190,7 +216,11 @@ if uploaded_file is not None:
         "></div>
         """,
         unsafe_allow_html=True
-    )     
+    )  
+    
+    st.subheader("Outfit Suggestion")
+    st.write(outfit_suggestion)
+
 
 
     
