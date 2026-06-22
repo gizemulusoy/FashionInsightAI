@@ -2,3 +2,6 @@ streamlit
 pillow
 tensorflow
 numpy
+ultralytics
+opencv-python-headless
+google-genai
